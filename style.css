@@ -1,0 +1,215 @@
+/* 全体のリセットと共通スタイル */
+body {
+    margin: 0;
+    background-color: #fdcf00;
+    overflow-x: hidden; /* 横方向のスクロールバーを非表示にする */
+  font-family: "Kaisei Decol", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+/* ヘッダーのスタイル */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0); /* 透明な背景 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1000; /* ヘッダーを最前面に */
+}
+
+.header-logo a {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+
+.header-nav {
+    display: block;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+
+
+/* ！！！ヘッダーのスタイルmainだけ！！！！！！！！！！！！！*/
+.header-logo a {
+    display: none;
+}
+/* ！！！！！！ヘッダーのスタイルmainだけおわり！！！！！！！*/
+
+
+/* ハンバーガーメニューのスタイル */
+.hamburger-menu {
+    display: none; /* デフォルトでは非表示 */
+    cursor: pointer;
+}
+
+.hamburger-menu .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 5px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+/* 画面サイズが768px以下の場合 */
+@media (max-width: 768px) {
+    .header-nav {
+        display: none; /* 通常のナビゲーションを非表示に */
+        flex-direction: column; /* ハンバーガーメニュー展開時に縦並びにする */
+        position: absolute;
+        top: 70px; /* ヘッダーの高さに合わせて調整 */
+        left: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.9); /* メニュー展開時の背景 */
+        padding: 10px 0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+    }
+
+    .nav-links.active {
+        display: flex; /* JavaScriptで.activeクラスが追加されたら表示 */
+    }
+
+    .hamburger-menu {
+        display: block; /* 表示に切り替え */
+    }
+}
+
+/* メインコンテンツのスタイル */
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* 画面全体を占める */
+    text-align: center;
+    position: relative; /* 背景要素の配置基準に */
+    overflow: hidden; /* 背景画像がはみ出してもスクロールさせない */
+}
+/* メインコンテナ（見出しとボタンをまとめる） */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh * 5 / 7);
+    width: 100%;
+    padding: 10% 0;
+    z-index: 1;
+}
+
+/* 見出しのスタイル */
+.main-title {
+    font-size: 2em;
+    margin-bottom: 2em;
+    color: #333;
+    font-family: "Kaisei Decol", serif;
+    text-align: center;
+}
+
+/* 背景要素のコンテナ */
+.background-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* 背景要素がクリックなどを邪魔しないように */
+}
+
+/* 右側の背景画像 */
+.bg-image-right {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 100vh; /* 縦画面にぴったり収める */
+    width: auto; /* 高さに合わせて幅を自動調整 */
+    object-fit: cover; /* 画像の比率を保ちつつ、指定したサイズに収まるようにトリミング */
+    z-index: -1; /* 他のコンテンツの下に配置 */
+}
+
+/* 左下角の回転する背景画像 */
+.bg-image-left-bottom {
+    position: absolute;
+    left: -70px;
+    bottom: 0;
+    width: 300px; /* 画面幅の半分 */
+    height: auto;
+    transform: translateX(-25%) translateY(25%); /* 半分切れるように左下へ移動 */
+    transform-origin: center center; /* 回転の中心を画像の中央に設定 */
+    animation: rotate 10s linear infinite; /* 10秒かけて無限に回転 */
+    z-index: -2; /* 他のコンテンツの下に配置 */
+    max-width: none; /* 幅の長さに干渉しないように */
+}
+
+/* 回転アニメーションのキーフレーム */
+@keyframes rotate {
+    from {
+        transform: translateX(-25%) translateY(25%) rotate(240deg);
+    }
+    to {
+        transform: translateX(-25%) translateY(25%) rotate(0deg);
+    }
+}
+
+/* ボタンコンテナのスタイル */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    z-index: 1;
+    width: 100%;
+    text-align: justify;
+}
+
+/* ボタンのスタイル */
+.nav-button:hover {
+    background-color: #f0f0f0; /* ホバー時の背景色を少し暗く */
+    color: #111;
+}
+.nav-button {
+    display: block;
+    padding: 15px 30px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* 影を追加 */
+}
+
+.nav-button:hover {
+    background-color: #9ecdff;
+}
+
+@media (max-width: 768px) {
+
+}
